@@ -16,7 +16,7 @@ const [Video, setVideo] = useState({
     }).then(e=>setVideo({...e.data.data}));
   },[])
   return (
-    <div className='text-white'>
+    <div className='text-white my-1'>
         <Link to={'video/'+props.id}>
         <div className='mx-auto rounded-md shadow-md'>
             <img src={Video.img} alt="" className='rounded-t-lg' />

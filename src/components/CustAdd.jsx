@@ -23,7 +23,12 @@ function CustAdd() {
         name: e.data.data.title,
         img: e.data.data.img,
         addedByUser: userId
+      },{
+        headers: {
+        'Content-Type': 'application/json'
+        }
       }).then(e=>{
+        console.log(e);
         if(e.data.status === '1'){
           toast.success('Add SuccesFully')
       }else{
