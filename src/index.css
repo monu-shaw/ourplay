@@ -1,13 +1,39 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+
+.varela{
+    font-family: 'Varela Round', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.line-or {
+    text-align:center;
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    grid-template-rows: 20px 0;
+    grid-gap: 20px;
+    align-items:center;
+    }
+    
+    .line-or:after,.line-or:before {
+    content: " ";
+    display: block;
+    border-bottom: 1px solid #96F048;
+    height:3px;
+    }
+
+.cust-shadow{
+    box-shadow: rgb(228, 239, 250) 0px 20px 30px -10px;
+}
+input{
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.Toastify__toast-theme--dark {
+    background-color: #191919;
 }

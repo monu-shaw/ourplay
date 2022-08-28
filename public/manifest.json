@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Our Play",
+  "name": "Our Play is Simple app which helps To play youtube in background.",
   "icons": [
     {
       "src": "favicon.ico",
