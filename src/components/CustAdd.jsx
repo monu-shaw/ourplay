@@ -1,9 +1,10 @@
-import axios from 'axios';
 import React from 'react'
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import {  useNavigate } from 'react-router-dom';
+import apiCalls from '../apiCalls';
+import axios from 'axios';
 
 function CustAdd() {
   const userId = useSelector(e=>e.user.userID);
@@ -16,7 +17,7 @@ function CustAdd() {
       url: document.getElementById('addLinkUrl').value
     }).then(e=>{
       if(document.getElementById('linkType').value === 'video'){
-        axios.post('http://localhost/ourplayapi/ajax.inc.php',{
+        apiCalls.post('',{
         addUrl: '',
         url: document.getElementById('addLinkUrl').value,
         name: e.data.data.title,
@@ -32,7 +33,7 @@ function CustAdd() {
         toast.warn(er);
       });
     }else{
-      axios.post('http://localhost/ourplayapi/ajax.inc.php',{
+      apiCalls.post('',{
         addUrlPlaylist: '',
         playListUrl: document.getElementById('addLinkUrl').value,
         playListName: e.data.data.title,
