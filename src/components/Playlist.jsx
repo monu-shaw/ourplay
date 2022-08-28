@@ -11,8 +11,10 @@ function Playlist()  {
             if(e.data != 0){
                 setVideo(e.data);
                 setError(false)
+            }else{
+              setError(true)
             }
-            setError(true)
+            
         });
       }
     

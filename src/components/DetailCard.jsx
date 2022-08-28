@@ -44,7 +44,7 @@ const [Video, setVideo] = useState({
         <Link to={'/videoplaylist/'+props.id}>
         <div className='mx-auto rounded-xl shadow-md'>
             <img src={Video.img} alt="" style={{width: '100%'}} className='rounded-t-lg' />
-            <div class="uppercase tracking-wide text-sm px-1 text-indigo-500 font-semibold">PlayList</div>
+            <div className="uppercase tracking-wide text-sm px-1 text-indigo-500 font-semibold">{Video.title?'PlayList':''}</div>
             <p className='font-serif mt-2 px-1'>{Video.title}</p>
         </div>
         </Link>

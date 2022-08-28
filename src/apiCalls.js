@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const apiCalls =  axios.create({
-        baseURL: 'http://localhost/ourplayapi/ajax.inc.php',
+        baseURL: 'https://shaw101ways.ga/ourplayapi/ajax.inc.php',
     });
 
 export default apiCalls;
