@@ -41,7 +41,6 @@ function PlayList(){
         if(e.data !== 0){
           setVideo(e.data);
         }
-        console.log(e.data);
       }
         );
     }

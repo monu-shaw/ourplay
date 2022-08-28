@@ -8,7 +8,6 @@ function Search({location}) {
   location(locationP.pathname)
   const [searchResult, setsearchResult] = useState([]);
   const search= (srcstr)=>{
-    console.log(srcstr);
     apiCalls(`?search=${srcstr}`).then(e=>setsearchResult(e.data))
   }
   useEffect(() => {

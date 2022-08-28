@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import apiCalls from '../apiCalls';
 import {DetailCard} from './DetailCard'
@@ -7,16 +6,11 @@ function Home() {
   const [video, setVideo] = useState([]);
   useEffect(() => {
     const Video = ()=>{
-      apiCalls.get('?allVideo').then(e=>setVideo(e.data)); 
-    }
-    const test = ()=>{
-      axios.get('https://fakestoreapi.com/products').then(e=>console.log(e.data)); 
+      apiCalls.get('?allVideo').then(e=>setVideo(e.data));
     }
   
     return () => {
       Video();
-      test()
-      
     }
   }, [])
   

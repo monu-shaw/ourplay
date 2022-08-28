@@ -23,7 +23,6 @@ function CustAdd() {
         img: e.data.data.img,
         addedByUser: userId
       }).then(e=>{
-        console.log(e);
         if(e.data.status === '1'){
           toast.success('Add SuccesFully')
       }else{
