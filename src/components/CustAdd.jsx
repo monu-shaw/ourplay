@@ -26,6 +26,7 @@ function CustAdd() {
         data.append('name', e.data.data.title);
         data.append('img', e.data.data.img);
         data.append('addedByUser', userId);
+        data.append('availableStatus', document.getElementById('privateType').value);
         apiCalls.post('',data,{
         headers: {
         'Content-Type': 'application/json'
@@ -47,6 +48,7 @@ function CustAdd() {
         data.append('playListUrl', document.getElementById('addLinkUrl').value);
         data.append('playListName', e.data.data.title);
         data.append('addedByUser', userId);
+        data.append('availableStatus', document.getElementById('privateType').value);
       apiCalls.post('',data).then(e=>{
         setformSubmit(false);
         if(e.data.status === '1'){
@@ -91,6 +93,12 @@ function CustAdd() {
             <select  id="linkType" className='bg-cust-dark p-2 border'>
               <option value="video">Video</option>
               <option value="playlist">Playlist</option>
+            </select>
+          </div>
+          <div className="mb-8 text-white mx-auto grid grid-cols-1 w-4/5">
+            <select  id="privateType" className='bg-cust-dark p-2 border'>
+              <option selected value="1">Public</option>
+              <option value="0">Private</option>
             </select>
           </div>
           {formSubmit?(<button type="submit"  className={`transition ease-in-out w-3/5 py-1 bg-cust-green mx-auto font-medium rounded-sm antialiased disabled:opacity-75 `} disabled>LOADING..</button>):(<button type="submit"  className={`transition ease-in-out w-3/5 py-1 bg-cust-green mx-auto font-medium hover:bg-cust-green/75 rounded-sm antialiased`}>ADD</button>)}
