@@ -8,8 +8,20 @@ function ProfileHome() {
     const location = useLocation();
     const [ActiveLocation, setActiveLocation] = useState(true)
     const loggedStatus = useSelector((state)=>state.user.loggedStatus);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const setDefaultLocationWithLocalstorage = (x) => {
+      setActiveLocation(x)
+      localStorage.setItem('defView', x)
+    }
     useEffect(()=>{
+      const getDefaultLocationWithLocalstorage = ()=>{
+        if(localStorage.getItem('defView') === 'true'){
+          setActiveLocation(true);
+        }else{
+          setActiveLocation(false);
+        }
+      }
+
       const checkLoggedStatus =()=>{
           if(!loggedStatus){
               navigate('/profile') 
@@ -17,13 +29,14 @@ function ProfileHome() {
       }
       return()=>{
           checkLoggedStatus()
+          getDefaultLocationWithLocalstorage()
       }
   },[])
   return (
     <div>
         <div className="grid grid-cols-2 justify-items-center mb-2">
-          <div className={ActiveLocation?`text-cust-green border-b-2 w-full text-center bg-cust-green/30 py-2`:`py-2 text-white text-center border-b-2 w-full`} onClick={()=>setActiveLocation(true)}>Video</div>
-          <div className={!ActiveLocation?`text-cust-green border-b-2 w-full text-center py-2 bg-cust-green/30`:`py-2 text-white w-full text-center border-b-2`} onClick={()=>setActiveLocation(false)}>PlayList</div>
+          <div className={ActiveLocation?`text-cust-green border-b-2 w-full text-center bg-cust-green/30 py-2`:`py-2 text-white text-center border-b-2 w-full`} onClick={()=>setDefaultLocationWithLocalstorage(true)}>Video</div>
+          <div className={!ActiveLocation?`text-cust-green border-b-2 w-full text-center py-2 bg-cust-green/30`:`py-2 text-white w-full text-center border-b-2`} onClick={()=>setDefaultLocationWithLocalstorage(false)}>PlayList</div>
         </div>
         {loggedStatus?(ActiveLocation?(<Video/>):(<PlayList/>)):''}
     </div>

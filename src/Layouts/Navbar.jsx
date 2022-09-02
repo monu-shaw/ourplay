@@ -10,6 +10,7 @@ function Navbar() {
   const dispatch = useDispatch()
   const handelLogout = ()=>{
     setSideBar(!sideBar);
+    localStorage.removeItem('defView');
     dispatch(logOUT());
   }
   return (

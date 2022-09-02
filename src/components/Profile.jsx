@@ -51,6 +51,7 @@ function Login(){
         apiCalls.post('',data).then(e=>{
             if(e.data.status === '1'){
                 dispatch(logIN(e.data.data[0].id))
+                localStorage.setItem('defView', true)
                 navigate('/user');
             }else{
                 toast.warn(e.data.data);

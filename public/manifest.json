@@ -1,6 +1,6 @@
 {
   "short_name": "Our Play",
-  "name": "Our Play is Simple app which helps To play youtube in background.",
+  "name": "OurPlay",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#96F048",
   "background_color": "#ffffff"
 }
