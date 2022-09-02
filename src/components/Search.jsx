@@ -5,7 +5,9 @@ import { DetailCard, PlayListDetailCard } from './DetailCard';
 
 function Search({location}) {
   const locationP = useLocation();
-  location(locationP.pathname)
+  const setPath=(x)=>{
+    location(x);
+  }
   const [searchResult, setsearchResult] = useState([]);
   const [SearchType, setSearchType] = useState('video');
   const [Filter, setFilter] = useState(false)
@@ -32,9 +34,7 @@ function Search({location}) {
   useEffect(() => {
     
   
-    return () => {
-      
-    }
+      setPath(locationP.pathname)
   }, [])
   
   return (
@@ -45,11 +45,11 @@ function Search({location}) {
         <h1 onClick={()=>setFilter(true)} className='' ><i className="border-bg-cust-dark/20 border hover:border-cust-green hover:border rounded-tl-lg rounded-br-lg bg-cust-green/20 px-3 py-2 text-cust-green bi bi-filter"></i></h1>
       </div>
       {Filter && <FilterModel setFilter={setFilter} Filter={Filter} setSearchType={onTypeChange} />}
-      <div className={`text-cust-dark dark:text-white grid mx-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 md:gap-4 ${Filter?`overflow-hidden h-[90vh]`:``}`}>
+      <div className={`text-cust-dark dark:text-white grid mx-1 sm:grid-cols-1 ${searchResult.length !== 0?`md:grid-cols-3 lg:grid-cols-4`:``}  md:gap-4 ${Filter?`overflow-hidden h-[90vh]`:``}`}>
         {searchResult.length !== 0?(SearchType === 'video'?(searchResult?.map(e=>(
-          <DetailCard url={e.url} id={e.id} key={e.id} />
+          <DetailCard url={e.url} id={e.id} key={e.id} upDatePath={setPath} />
         ))):(searchResult?.map(e=>(
-          <PlayListDetailCard url={e.playListUrl} id={e.id} key={e.id} />
+          <PlayListDetailCard url={e.playListUrl} id={e.id} key={e.id} upDatePath={setPath} />
         )))):(<h1 className='text-cust-green/80 text-center mt-8 antialiased'>No Item</h1>)}
       </div>
       

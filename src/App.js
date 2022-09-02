@@ -1,6 +1,6 @@
 import React, {  useState } from 'react'
 import Navbar from './Layouts/Navbar'
-import {BrowserRouter, Routes, Route } from 'react-router-dom'
+import {BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Search from './components/Search'
 import Home from './components/Home'
 import CustAdd from './components/CustAdd'
@@ -12,6 +12,7 @@ import { store } from './redux/store'
 import { Provider } from 'react-redux'
 import Playlist from './components/Playlist'
 import CustPlayerPlaylist from './components/CustPlayerPlaylist'
+import Tester from './components/Tester'
 
 
 
@@ -44,6 +45,7 @@ function App() {
             <Route path='profile' element={<Profile/>}/>
             <Route path='user' element={<ProfileHome/>}/>
             <Route path='playlist' element={<Playlist/>}/>
+            <Route path='yttester' element={<Tester/>}/>
           </Routes>
         </BrowserRouter>
       </Provider>

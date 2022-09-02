@@ -10,6 +10,11 @@ const [Video, setVideo] = useState({
     domain: '',
     origin: ''
 });
+ const upDate = ()=>{
+  if (props.upDatePath) {
+    props.upDatePath('')
+  }
+ }
   useEffect(()=>{
     axios.post('https://monu-linkpreview.herokuapp.com/',{
       url: props.url
@@ -17,7 +22,7 @@ const [Video, setVideo] = useState({
   },[])
   return (
     <div className='text-white my-1'>
-        <Link to={'video/'+props.id}>
+        <Link to={'/video/'+props.id} onClick={()=>upDate()}>
         <div className='mx-auto rounded-md shadow-md'>
             <img src={Video.img} alt="" className='rounded-t-lg' />
             <h6 className='font-serif'>{Video.title}</h6>
@@ -34,6 +39,11 @@ const [Video, setVideo] = useState({
     domain: '',
     origin: ''
 });
+const upDate = ()=>{
+  if (props.upDatePath) {
+    props.upDatePath('')
+  }
+ }
   useEffect(()=>{
     axios.post('https://monu-linkpreview.herokuapp.com/',{
       url: props.url
@@ -41,7 +51,7 @@ const [Video, setVideo] = useState({
   },[])
   return (
     <div className='text-white'>
-        <Link to={'/videoplaylist/'+props.id}>
+        <Link to={'/videoplaylist/'+props.id} onClick={()=>upDate()}>
         <div className='mx-auto rounded-xl shadow-md'>
             <img src={Video.img} alt="" style={{width: '100%', height: '210px'}} className='rounded-t-lg' />
             <div className="uppercase tracking-wide text-sm px-1 text-indigo-500 font-semibold">{Video.title?'PlayList':''}</div>
