@@ -17,9 +17,9 @@ function Playlist()  {
             
         });
       }
-    
+      Video();
       return () => {
-        Video();
+        
       }
     }, [])
     

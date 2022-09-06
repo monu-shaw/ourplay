@@ -14,7 +14,9 @@ function CustAdd() {
   
   const AddVid = (x)=>{
     x.preventDefault();
+    if(userId === ''){toast.warn('Try Again, Later'); return}
     if(document.getElementById('addLinkUrl').value === ''){toast.warn('Empty Feild Not Allowed'); return}
+    
     const data = new FormData(x.target);
     setformSubmit(true);
     axios.post('https://monu-linkpreview.herokuapp.com/',{
@@ -69,15 +71,11 @@ function CustAdd() {
   }
 
   useEffect(()=>{
-      const checkLoggedStatus =()=>{
-          if(!loggedStatus){
+      if(!loggedStatus){
               navigate('/profile') 
           }
-      }
-      return()=>{
-          checkLoggedStatus()
-      }
-  },[])
+  },[]);
+  
   return (
     <div>
         <form onSubmit={AddVid} className='flex justify-center flex-col h-4/5 mt-10'>
@@ -97,7 +95,7 @@ function CustAdd() {
           </div>
           <div className="mb-8 text-white mx-auto grid grid-cols-1 w-4/5">
             <select  id="privateType" className='bg-cust-dark p-2 border'>
-              <option selected value="1">Public</option>
+              <option value="1">Public</option>
               <option value="0">Private</option>
             </select>
           </div>

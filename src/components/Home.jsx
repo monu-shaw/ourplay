@@ -9,9 +9,7 @@ function Home() {
       apiCalls.get('?allVideo').then(e=>setVideo(e.data));
     }
   
-    return () => {
       Video();
-    }
   }, [])
   
   

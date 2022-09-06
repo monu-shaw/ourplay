@@ -11,8 +11,9 @@ function CustPlayer() {
       const getVideo = ()=>{
         apiCalls.get(`?getOne=${id}`).then(e=>setvideoStatus(e.data))
       }
+      getVideo()
       return ()=>{
-        getVideo()
+        
       }
     },[])
   return (

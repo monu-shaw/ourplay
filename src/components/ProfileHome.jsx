@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import apiCalls from '../apiCalls';
 import { DetailCard, PlayListDetailCard } from './DetailCard';
-import { useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
+//import { fetchPlaylistNVideo } from '../redux/slices/userSlice';
 
 function ProfileHome() {
     const location = useLocation();
@@ -14,6 +15,7 @@ function ProfileHome() {
       localStorage.setItem('defView', x)
     }
     useEffect(()=>{
+      
       const getDefaultLocationWithLocalstorage = ()=>{
         if(localStorage.getItem('defView') === 'true'){
           setActiveLocation(true);
@@ -22,21 +24,20 @@ function ProfileHome() {
         }
       }
 
-      const checkLoggedStatus =()=>{
-          if(!loggedStatus){
-              navigate('/profile') 
-          }
+      if(!loggedStatus){
+        navigate('/profile') 
       }
+      getDefaultLocationWithLocalstorage();
       return()=>{
-          checkLoggedStatus()
-          getDefaultLocationWithLocalstorage()
+          //getDefaultLocationWithLocalstorage();
+          //dispatch(fetchPlaylistNVideo());
       }
   },[])
   return (
-    <div>
+    <div className=''>
         <div className="grid grid-cols-2 justify-items-center mb-2">
-          <div className={ActiveLocation?`text-cust-green border-b-2 w-full text-center bg-cust-green/30 py-2`:`py-2 text-white text-center border-b-2 w-full`} onClick={()=>setDefaultLocationWithLocalstorage(true)}>Video</div>
-          <div className={!ActiveLocation?`text-cust-green border-b-2 w-full text-center py-2 bg-cust-green/30`:`py-2 text-white w-full text-center border-b-2`} onClick={()=>setDefaultLocationWithLocalstorage(false)}>PlayList</div>
+          <div className={ActiveLocation?`transition-all ease-out delay-100 text-cust-green border-b-2 w-full text-center bg-cust-green/30 py-2`:`py-2 text-white text-center border-b-2 w-full`} onClick={()=>setDefaultLocationWithLocalstorage(true)}>Video</div>
+          <div className={!ActiveLocation?`transition-all ease-in delay-150 text-cust-green border-b-2 w-full text-center py-2 bg-cust-green/30`:`py-2 text-white w-full text-center border-b-2`} onClick={()=>setDefaultLocationWithLocalstorage(false)}>PlayList</div>
         </div>
         {loggedStatus?(ActiveLocation?(<Video/>):(<PlayList/>)):''}
     </div>
@@ -57,10 +58,7 @@ function PlayList(){
       }
         );
     }
-  
-    return () => {
       Video();
-    }
   }, [])
   
   
@@ -84,9 +82,7 @@ function Video(){
       });
     }
   
-    return () => {
-      Video();
-    }
+    Video();
   }, [])
   
   

@@ -32,9 +32,7 @@ function Search({location}) {
     }
   }
   useEffect(() => {
-    
-  
-      setPath(locationP.pathname)
+    setPath(locationP.pathname)
   }, [])
   
   return (

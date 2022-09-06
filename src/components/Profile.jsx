@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { logIN } from '../redux/slices/userSlice';
+import { logIN, Register } from '../redux/slices/userSlice';
 import apiCalls from '../apiCalls';
 
 function Profile() {
@@ -13,19 +13,14 @@ function Profile() {
     const loggedStatus = useSelector((state)=>state.user.loggedStatus);
     const navigate = useNavigate()
     useEffect(()=>{
-        const checkLoggedStatus =()=>{
             if(loggedStatus){
                 navigate('/user');
             }
-        }
-        return()=>{
-            checkLoggedStatus()
-        }
     },[])
     
   return (
     <div className='min-h-[90vh] flex justify-center flex-col mx-auto pb-10'>
-        <div className='bg-cust-green/10 backdrop-blur-sm h-1/5 p-5 w-4/5 md:w-2/5 mx-auto rounded-lg'>
+        <div className='transition-all ease-in duration-150 bg-cust-green/10 backdrop-blur-sm h-1/5 p-5 w-4/5 md:w-2/5 mx-auto rounded-lg'>
             {logInDisplay?<Login />:<Signup/>}
             <div>
                 
@@ -80,7 +75,7 @@ function Signup(){
         if(e.target.password.value === e.target.confirmrPassword.value){
             apiCalls.post('',data).then(e=>{
                 if(e.data.status === '1'){
-                    dispatch(logIN(e.data.data.id));
+                    dispatch(Register(e.data.data));
                     navigate('/user');
                     toast.success('success')
                 }else{

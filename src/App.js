@@ -36,13 +36,13 @@ function App() {
           />
           <Routes>
 
-            <Route path='/' element={<Home/>} />
+            <Route exact path='/' element={<Home/>} />
             <Route path='search' element={<Search location={setlocationPage}/>} />
             {/* dev Routes */ }
-            <Route path='add' element={<CustAdd/>}/>
+            <Route exact path='add' element={<CustAdd/>}/>
             <Route path='video/:id' element={<CustPlayer/>}/>
             <Route path='videoplaylist/:id' element={<CustPlayerPlaylist />}/>
-            <Route path='profile' element={<Profile/>}/>
+            <Route exact path='profile' element={<Profile/>}/>
             <Route path='user' element={<ProfileHome/>}/>
             <Route path='playlist' element={<Playlist/>}/>
             <Route path='yttester' element={<Tester/>}/>
