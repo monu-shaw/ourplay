@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import {  useNavigate } from 'react-router-dom';
 import apiCalls from '../apiCalls';
 import axios from 'axios';
+import { fetchPlaylistNVideo, fetchVideo } from '../redux/slices/userSlice';
 
 function CustAdd() {
+  const dispatch = useDispatch();
+
   const userId = useSelector(e=>e.user.userID);
   const loggedStatus = useSelector((state)=>state.user.loggedStatus);
   const navigate = useNavigate();
@@ -37,6 +40,7 @@ function CustAdd() {
         setformSubmit(false);
         if(e.data.status === '1'){
           toast.success('Add SuccesFully')
+          dispatch(fetchVideo(userId));
           x.target.reset();
       }else{
           toast.warn(e.data.data);
@@ -49,12 +53,14 @@ function CustAdd() {
         data.append('addUrlPlaylist', '');
         data.append('playListUrl', document.getElementById('addLinkUrl').value);
         data.append('playListName', e.data.data.title);
+        data.append('playListImg', e.data.data.img);
         data.append('addedByUser', userId);
         data.append('availableStatus', document.getElementById('privateType').value);
       apiCalls.post('',data).then(e=>{
         setformSubmit(false);
         if(e.data.status === '1'){
           toast.success('Add SuccesFully')
+          dispatch(fetchPlaylistNVideo(userId));
           x.target.reset();
       }else{
           toast.warn(e.data.data);

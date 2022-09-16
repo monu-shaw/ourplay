@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import apiCalls from '../apiCalls';
 import { DetailCard, PlayListDetailCard } from './DetailCard';
-import {  useSelector } from 'react-redux';
-//import { fetchPlaylistNVideo } from '../redux/slices/userSlice';
+import {  useDispatch, useSelector } from 'react-redux';
+import { fetchPlaylistNVideo, fetchVideo } from '../redux/slices/userSlice';
 
 function ProfileHome() {
+    
     const location = useLocation();
     const [ActiveLocation, setActiveLocation] = useState(true)
     const loggedStatus = useSelector((state)=>state.user.loggedStatus);
@@ -30,7 +31,7 @@ function ProfileHome() {
       getDefaultLocationWithLocalstorage();
       return()=>{
           //getDefaultLocationWithLocalstorage();
-          //dispatch(fetchPlaylistNVideo());
+          
       }
   },[])
   return (
@@ -47,50 +48,64 @@ function ProfileHome() {
 export default ProfileHome
 
 function PlayList(){
+  const dispatch = useDispatch();
+
   const userId = useSelector((s)=>s.user.userID);
-  const [video, setVideo] = useState([]);
+  const noRecord = useSelector(s=>s.user.userNoPlayList);
+  const video = useSelector(s=>s.user.userPlayList);
+
   useEffect(() => {
     const Video = ()=>{
-      apiCalls.get('?userPlaylist='+userId).then(e=>{
-        if(e.data !== 0){
-          setVideo(e.data);
-        }
-      }
-        );
+    dispatch(fetchPlaylistNVideo(userId));
     }
+    if(video.length === 0 && noRecord === false){
       Video();
+    }
+      
   }, [])
   
   
   return (
     <div className='text-cust-dark dark:text-white grid mx-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 md:gap-4'>
+      {noRecord && <NoRecord recived={`Playlist`}/>}
       {video?.map(e=>(
-        <PlayListDetailCard url={e.playListUrl} id={e.id} key={e.id} />
+        <PlayListDetailCard url={e.playListUrl} id={e.id} key={e.id} title={e.playListName} img={e.playListImg} />
       ))}
     </div>
   )
 }
 function Video(){
-  const userId = useSelector((state)=>state.user.userID);
-  const [video, setVideo] = useState([]);
+  const dispatch = useDispatch();
+
+  const userId = useSelector((s)=>s.user.userID);
+  const noRecord = useSelector(s=>s.user.userNoVideo);
+  const video = useSelector(s=>s.user.userVideo);
+
   useEffect(() => {
     const Video = ()=>{
-      apiCalls.get('?userVideos='+userId).then(e=>{
-        if(e.data !== 0){
-          setVideo(e.data)
-        }
-      });
+    dispatch(fetchVideo(userId));
     }
-  
-    Video();
+    if(video.length === 0 && noRecord === false){
+      Video();
+    }
+      
   }, [])
   
   
   return (
     <div className='text-cust-dark dark:text-white grid mx-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 md:gap-4'>
+      {noRecord && <NoRecord recived={`Video`}/>}
       {video?.map(e=>(
-        <DetailCard url={e.url} id={e.id} key={e.id} />
+        <DetailCard url={e.url} id={e.id} key={e.id} title={e.name} img={e.img} />
       ))}
     </div>
   )
+}
+
+function NoRecord({recived}){
+  return(
+    <>
+      <h6 className='p-4 text-center text-cust-green/30'>You Have Not Saved Any {recived}</h6>
+    </>
+  );
 }

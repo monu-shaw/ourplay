@@ -45,9 +45,9 @@ function Search({location}) {
       {Filter && <FilterModel setFilter={setFilter} Filter={Filter} setSearchType={onTypeChange} />}
       <div className={`text-cust-dark dark:text-white grid mx-1 sm:grid-cols-1 ${searchResult.length !== 0?`md:grid-cols-3 lg:grid-cols-4`:``}  md:gap-4 ${Filter?`overflow-hidden h-[90vh]`:``}`}>
         {searchResult.length !== 0?(SearchType === 'video'?(searchResult?.map(e=>(
-          <DetailCard url={e.url} id={e.id} key={e.id} upDatePath={setPath} />
+          <DetailCard url={e.url} id={e.id} key={e.id} title={e.name} img={e.img} upDatePath={setPath} />
         ))):(searchResult?.map(e=>(
-          <PlayListDetailCard url={e.playListUrl} id={e.id} key={e.id} upDatePath={setPath} />
+          <PlayListDetailCard url={e.playListUrl} id={e.id} key={e.id} title={e.playListName} img={e.playListImg}  upDatePath={setPath} />
         )))):(<h1 className='text-cust-green/80 text-center mt-8 antialiased'>No Item</h1>)}
       </div>
       

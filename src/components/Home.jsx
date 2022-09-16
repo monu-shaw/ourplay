@@ -16,7 +16,7 @@ function Home() {
   return (
     <div className='text-cust-dark dark:text-white grid mx-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 md:gap-4'>
       {video.map(e=>(
-        <DetailCard url={e.url} id={e.id} key={e.id} />
+        <DetailCard url={e.url} id={e.id} key={e.id} title={e.name} img={e.img} />
       ))}
 
     </div>

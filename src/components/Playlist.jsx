@@ -27,7 +27,7 @@ function Playlist()  {
     return (
       <div className='text-cust-dark dark:text-white grid mx-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 md:gap-4'>
         {video.map(e=>(
-          <PlayListDetailCard url={e.playListUrl} id={e.id} key={e.id} />
+          <PlayListDetailCard url={e.playListUrl} id={e.id} key={e.id} title={e.playListName} img={e.playListImg} />
         ))}
         {errorAny?(<h2 className='text-center'>No Playlist Found</h2>):''}
   
