@@ -7,7 +7,7 @@ import apiCalls from '../apiCalls';
 import axios from 'axios';
 import { fetchPlaylistNVideo, fetchVideo } from '../redux/slices/userSlice';
 
-function CustAdd() {
+function Share() {
   const dispatch = useDispatch();
 
   const userId = useSelector(e=>e.user.userID);
@@ -77,7 +77,11 @@ function CustAdd() {
   useEffect(()=>{
       if(!loggedStatus){
               navigate('/profile') 
-          }
+        }
+        var parsedUrl = new URL(window.location.toString());
+        let url  = parsedUrl.searchParams.get('text')
+        //let title  = parsedUrl.searchParams.get('text')
+        document.getElementById('addLinkUrl').value = url;
   },[]);
   
   return (
@@ -87,10 +91,6 @@ function CustAdd() {
             <label className="form-label grid font-mono antialiased text-xl">Add Video Link</label>
             <input type='text' className="dark:text-light bg-cust-dark border-0 border-b border-cust-green" id="addLinkUrl" placeholder='Add Url of Video/Playlist' />
           </div>
-          {/* <div className="mb-8 text-white mx-auto grid grid-cols-1 w-4/5">
-            <label className="form-label grid font-mono antialiased">Category</label>
-            <input type='text' name="addLinkUrl" className="dark:text-light bg-cust-dark border-0 border-b border-cust-green" id="exampleInputEmail1" placeholder='Add Category' />
-          </div> */}
           <div className="mb-8 text-white mx-auto grid grid-cols-1 w-4/5">
             <select  id="linkType" className='bg-cust-dark p-2 border'>
               <option value="video">Video</option>
@@ -109,4 +109,18 @@ function CustAdd() {
   )
 }
 
-export default CustAdd
+export default Share
+
+export  function extractAllUrls(str) {
+    // Regular expression to match URLs with various protocols and formats
+    const regex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+    const matches = [];
+  
+    // Find all URLs using the regular expression
+    for (const match of str.matchAll(regex)) {
+      matches.push(match[0]);
+    }
+  
+    // Return all extracted URLs as an array
+    return matches;
+  }

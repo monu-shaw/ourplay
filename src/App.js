@@ -13,6 +13,7 @@ import { Provider } from 'react-redux'
 import Playlist from './components/Playlist'
 import CustPlayerPlaylist from './components/CustPlayerPlaylist'
 import Tester from './components/Tester'
+import Share from './components/share'
 
 
 
@@ -46,6 +47,7 @@ function App() {
             <Route path='user' element={<ProfileHome/>}/>
             <Route path='playlist' element={<Playlist/>}/>
             <Route path='yttester' element={<Tester/>}/>
+            <Route path='share' element={<Share/>}/>
           </Routes>
         </BrowserRouter>
       </Provider>
